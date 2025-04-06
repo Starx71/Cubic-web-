@@ -1,5 +1,5 @@
 declare module '@radix-ui/react-accordion' {
-  import { ReactElement, ReactNode } from 'react';
+  import { ReactElement, ReactNode, FC } from 'react';
   
   export interface AccordionRootProps {
     type?: 'single' | 'multiple';
@@ -25,15 +25,15 @@ declare module '@radix-ui/react-accordion' {
     className?: string;
   }
   
-  export const Root: React.FC<AccordionRootProps>;
-  export const Item: React.FC<AccordionItemProps>;
-  export const Header: React.FC<{ children?: ReactNode; className?: string }>;
-  export const Trigger: React.FC<AccordionTriggerProps>;
-  export const Content: React.FC<AccordionContentProps>;
+  export const Root: FC<AccordionRootProps>;
+  export const Item: FC<AccordionItemProps>;
+  export const Header: FC<{ children?: ReactNode; className?: string }>;
+  export const Trigger: FC<AccordionTriggerProps>;
+  export const Content: FC<AccordionContentProps>;
 }
 
 declare module '@radix-ui/react-alert-dialog' {
-  import { ReactElement, ReactNode } from 'react';
+  import { ReactElement, ReactNode, FC } from 'react';
   
   export interface AlertDialogRootProps {
     open?: boolean;
@@ -81,15 +81,15 @@ declare module '@radix-ui/react-alert-dialog' {
     className?: string;
   }
   
-  export const Root: React.FC<AlertDialogRootProps>;
-  export const Trigger: React.FC<AlertDialogTriggerProps>;
-  export const Portal: React.FC<{ children?: ReactNode }>;
-  export const Overlay: React.FC<{ className?: string }>;
-  export const Content: React.FC<AlertDialogContentProps>;
-  export const Header: React.FC<AlertDialogHeaderProps>;
-  export const Footer: React.FC<AlertDialogFooterProps>;
-  export const Title: React.FC<AlertDialogTitleProps>;
-  export const Description: React.FC<AlertDialogDescriptionProps>;
-  export const Action: React.FC<AlertDialogActionProps>;
-  export const Cancel: React.FC<AlertDialogCancelProps>;
+  export const Root: FC<AlertDialogRootProps>;
+  export const Trigger: FC<AlertDialogTriggerProps>;
+  export const Portal: FC<{ children?: ReactNode }>;
+  export const Overlay: FC<{ className?: string }>;
+  export const Content: FC<AlertDialogContentProps>;
+  export const Header: FC<AlertDialogHeaderProps>;
+  export const Footer: FC<AlertDialogFooterProps>;
+  export const Title: FC<AlertDialogTitleProps>;
+  export const Description: FC<AlertDialogDescriptionProps>;
+  export const Action: FC<AlertDialogActionProps>;
+  export const Cancel: FC<AlertDialogCancelProps>;
 } 
