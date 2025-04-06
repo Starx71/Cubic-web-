@@ -5,10 +5,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { ReactElement } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = (): ReactElement => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />

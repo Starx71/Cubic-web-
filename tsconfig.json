@@ -24,6 +24,6 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src", "src/types/node.d.ts"],
+  "include": ["src", "src/types/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
