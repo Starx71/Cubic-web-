@@ -71,3 +71,60 @@ Yes it is!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+# Cubic Web
+
+A modern React application built with Vite, TypeScript, and Shadcn UI.
+
+## React Type Resolution Issues
+
+If you're experiencing TypeScript errors related to React types (like `TS2305: Module '"react"' has no exported member 'ReactElement'`), follow these steps to fix them:
+
+1. Run the `fix-react-types.bat` script:
+   ```
+   .\fix-react-types.bat
+   ```
+
+   This script will:
+   - Clean the npm cache and node_modules
+   - Install React and its type definitions with compatible versions
+   - Install all other dependencies
+   - Verify the TypeScript configuration
+   - Create proper React type definitions
+   - Run the build to verify the fix
+
+2. If you're still experiencing issues, you can try a more thorough clean install:
+   ```
+   .\clean-install.bat
+   ```
+
+3. If you need to update React dependencies specifically:
+   ```
+   .\update-react-deps.bat
+   ```
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Project Structure
+
+- `src/components`: React components
+- `src/types`: TypeScript type definitions
+- `src/pages`: Page components
+- `src/hooks`: Custom React hooks
+- `src/utils`: Utility functions
+- `src/styles`: CSS and styling
+- `src/assets`: Static assets

@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect, type ReactElement } from 'react';
+import React from 'react';
 
 // Define the Cube type
 interface Cube {
@@ -14,13 +14,13 @@ interface Cube {
   pulsePhase: number;
 }
 
-export default function AnimatedCubes(): ReactElement {
-    const sceneRef = useRef<HTMLCanvasElement | null>(null);
-    const animationFrameRef = useRef<number | null>(null);
-    const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-    const cubesRef = useRef<Cube[]>([]);
+export default function AnimatedCubes(): React.ReactElement {
+    const sceneRef = React.useRef<HTMLCanvasElement | null>(null);
+    const animationFrameRef = React.useRef<number | null>(null);
+    const [mousePos, setMousePos] = React.useState<{ x: number; y: number }>({ x: 0, y: 0 });
+    const cubesRef = React.useRef<Cube[]>([]);
 
-    const drawCubes = useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
+    const drawCubes = React.useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         const cubes = cubesRef.current;
@@ -65,7 +65,7 @@ export default function AnimatedCubes(): ReactElement {
         }
     }, []);
 
-    const updateCubes = useCallback((canvas: HTMLCanvasElement) => {
+    const updateCubes = React.useCallback((canvas: HTMLCanvasElement) => {
         const cubes = cubesRef.current;
         if (!cubes) return;
 
@@ -92,13 +92,13 @@ export default function AnimatedCubes(): ReactElement {
         }
     }, [mousePos]);
 
-    const animate = useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
+    const animate = React.useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
         updateCubes(canvas);
         drawCubes(ctx, canvas);
         animationFrameRef.current = requestAnimationFrame(() => animate(ctx, canvas));
     }, [drawCubes, updateCubes]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const canvas = sceneRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');

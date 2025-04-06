@@ -1,26 +1,23 @@
-// This file extends the official React types with additional properties
-// that might be missing in the current version
+// This file extends the official React types
+// It adds missing properties that may be needed in your project
 
-import 'react';
+import * as React from 'react';
 
 declare module 'react' {
-  // Add displayName to components
+  // Add displayName to component types if it's missing
   interface FunctionComponent<P = {}> {
     displayName?: string;
   }
   
-  // Add displayName to forwardRef components
   interface ForwardRefExoticComponent<P> {
     displayName?: string;
   }
   
-  // Add displayName to memo components
-  interface MemoExoticComponent<T extends ComponentType<any>> {
+  interface MemoExoticComponent<T> {
     displayName?: string;
   }
   
-  // Add displayName to lazy components
-  interface LazyExoticComponent<T extends ComponentType<any>> {
+  interface LazyExoticComponent<T> {
     displayName?: string;
   }
 } 
