@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -10,14 +9,24 @@ interface SolutionCardProps {
     index: number;
 }
 
-const SolutionCard = ({ title, description, imageUrl, index }: SolutionCardProps) => {
+const SolutionCard = memo(({ title, description, imageUrl, index }: SolutionCardProps) => {
     const [isHovered, setIsHovered] = useState(false);
+    
+    const cardVariants = {
+        initial: { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+        animate: { opacity: 1, x: 0 },
+        transition: { duration: 0.8, ease: 'easeInOut', delay: index * 0.3 }
+    };
+
+    const imageVariants = {
+        initial: { scale: 1 },
+        hover: { scale: 1.05 },
+        transition: { duration: 0.3 }
+    };
     
     return (
         <motion.div
-            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeInOut', delay: index * 0.3 }}
+            {...cardVariants}
             viewport={{ once: true }}
             className={cn(
                 "flex flex-col md:flex-row items-center gap-8 bg-white rounded-xl shadow-lg",
@@ -26,15 +35,18 @@ const SolutionCard = ({ title, description, imageUrl, index }: SolutionCardProps
             )}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            role="article"
+            aria-label={`${title} solution`}
         >
             <div className="w-full md:w-1/2 overflow-hidden rounded-t-xl md:rounded-l-xl md:rounded-t-none">
                 <motion.img
                     src={imageUrl}
-                    alt={title}
-                    className="w-full h-auto object-cover transition-transform duration-300"
-                    style={{
-                        transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-                    }}
+                    alt={`${title} solution illustration`}
+                    className="w-full h-auto object-cover"
+                    variants={imageVariants}
+                    initial="initial"
+                    animate={isHovered ? "hover" : "initial"}
+                    loading="lazy"
                 />
             </div>
             <div className="w-full md:w-1/2 p-6">
@@ -43,6 +55,8 @@ const SolutionCard = ({ title, description, imageUrl, index }: SolutionCardProps
             </div>
         </motion.div>
     );
-};
+});
+
+SolutionCard.displayName = 'SolutionCard';
 
 export default SolutionCard;

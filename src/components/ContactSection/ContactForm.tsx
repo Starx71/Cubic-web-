@@ -1,19 +1,26 @@
-
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
 
-const ContactForm = () => {
-    const [formData, setFormData] = useState({
+interface FormData {
+    name: string;
+    email: string;
+    message: string;
+}
+
+type SubmissionStatus = 'idle' | 'success' | 'error';
+
+const ContactForm = memo(() => {
+    const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
         message: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>('idle');
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -35,7 +42,7 @@ const ContactForm = () => {
         }
 
         // Email validation (basic)
-        const emailRegex =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
             setIsSubmitting(false);
             setSubmissionStatus('error');
@@ -81,6 +88,7 @@ const ContactForm = () => {
                     placeholder="Your Name"
                     className="mt-1 bg-white/80 text-gray-900 border-gray-300 placeholder:text-gray-400"
                     disabled={isSubmitting}
+                    aria-required="true"
                 />
             </div>
             <div>
@@ -96,6 +104,7 @@ const ContactForm = () => {
                     placeholder="you@example.com"
                     className="mt-1 bg-white/80 text-gray-900 border-gray-300 placeholder:text-gray-400"
                     disabled={isSubmitting}
+                    aria-required="true"
                 />
             </div>
             <div>
@@ -111,16 +120,18 @@ const ContactForm = () => {
                     rows={4}
                     className="mt-1 bg-white/80 text-gray-900 border-gray-300 placeholder:text-gray-400"
                     disabled={isSubmitting}
+                    aria-required="true"
                 />
             </div>
             <Button
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 shadow-lg hover:scale-105 transition-all duration-300"
                 disabled={isSubmitting}
+                aria-label={isSubmitting ? "Sending message..." : "Send message"}
             >
                 {isSubmitting ? (
                     <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
                         Sending...
                     </>
                 ) : (
@@ -134,8 +145,10 @@ const ContactForm = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         className="bg-green-100 text-green-600 p-3 rounded-md flex items-center gap-2 border border-green-300"
+                        role="alert"
+                        aria-live="polite"
                     >
-                        <CheckCircle className="w-5 h-5" />
+                        <CheckCircle className="w-5 h-5" aria-hidden="true" />
                         Message sent successfully!
                     </motion.div>
                 )}
@@ -147,14 +160,18 @@ const ContactForm = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         className="bg-red-100 text-red-600 p-3 rounded-md flex items-center gap-2 border border-red-300"
+                        role="alert"
+                        aria-live="assertive"
                     >
-                        <AlertTriangle className="w-5 h-5" />
+                        <AlertTriangle className="w-5 h-5" aria-hidden="true" />
                         {errorMessage}
                     </motion.div>
                 )}
             </AnimatePresence>
         </form>
     );
-};
+});
+
+ContactForm.displayName = 'ContactForm';
 
 export default ContactForm;
