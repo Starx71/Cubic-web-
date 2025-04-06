@@ -1,5 +1,4 @@
-// @ts-ignore
-import React from 'react';
+import { useRef, useState, useCallback, useEffect, type ReactElement } from 'react';
 
 // Define the Cube type
 interface Cube {
@@ -15,16 +14,19 @@ interface Cube {
   pulsePhase: number;
 }
 
-export default function AnimatedCubes() {
-    const sceneRef = React.useRef<HTMLCanvasElement>(null);
-    const animationFrameRef = React.useRef<number | null>(null);
-    const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
-    const cubesRef = React.useRef<Cube[]>([]);
+export default function AnimatedCubes(): ReactElement {
+    const sceneRef = useRef<HTMLCanvasElement>(null);
+    const animationFrameRef = useRef<number | null>(null);
+    const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+    const cubesRef = useRef<Cube[]>([]);
 
-    const drawCubes = React.useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
+    const drawCubes = useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        for (const cube of cubesRef.current) {
+        const cubes = cubesRef.current;
+        if (!cubes) return;
+
+        for (const cube of cubes) {
             const depthFactor = 1 - cube.z / 400;
             const size = cube.size * depthFactor;
             const x = cube.x + (canvas.width / 2 - cube.x) * (1 - depthFactor) * 0.5;
@@ -62,8 +64,11 @@ export default function AnimatedCubes() {
         }
     }, []);
 
-    const updateCubes = React.useCallback((canvas: HTMLCanvasElement) => {
-        for (const cube of cubesRef.current) {
+    const updateCubes = useCallback((canvas: HTMLCanvasElement) => {
+        const cubes = cubesRef.current;
+        if (!cubes) return;
+
+        for (const cube of cubes) {
             // Add mouse interaction - cubes move away from mouse
             const dx = cube.x - mousePos.x;
             const dy = cube.y - mousePos.y;
@@ -86,13 +91,13 @@ export default function AnimatedCubes() {
         }
     }, [mousePos]);
 
-    const animate = React.useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
+    const animate = useCallback((ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
         updateCubes(canvas);
         drawCubes(ctx, canvas);
         animationFrameRef.current = requestAnimationFrame(() => animate(ctx, canvas));
     }, [drawCubes, updateCubes]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const canvas = sceneRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
@@ -123,11 +128,14 @@ export default function AnimatedCubes() {
             if (canvas) {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-                cubesRef.current.forEach((cube: Cube) => {
-                    cube.x = Math.random() * canvas.width;
-                    cube.y = Math.random() * canvas.height;
-                });
-                drawCubes(ctx, canvas);
+                const cubes = cubesRef.current;
+                if (cubes) {
+                    cubes.forEach((cube: Cube) => {
+                        cube.x = Math.random() * canvas.width;
+                        cube.y = Math.random() * canvas.height;
+                    });
+                    drawCubes(ctx, canvas);
+                }
             }
         };
 
