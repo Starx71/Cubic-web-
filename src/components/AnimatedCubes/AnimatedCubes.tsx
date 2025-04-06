@@ -15,7 +15,7 @@ interface Cube {
 }
 
 export default function AnimatedCubes(): ReactElement {
-    const sceneRef = useRef<HTMLCanvasElement>(null);
+    const sceneRef = useRef<HTMLCanvasElement | null>(null);
     const animationFrameRef = useRef<number | null>(null);
     const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
     const cubesRef = useRef<Cube[]>([]);
@@ -40,7 +40,8 @@ export default function AnimatedCubes(): ReactElement {
             ctx.fillRect(x - size / 2, y - size / 2, size, size);
 
             // 3D effect - top face
-            const topColor = `hsl(${cube.color.match(/\d+/g)?.join(',')}, 70%, 90%)`;
+            const colorMatch = cube.color.match(/\d+/g);
+            const topColor = colorMatch ? `hsl(${colorMatch.join(',')}, 70%, 90%)` : cube.color;
             ctx.fillStyle = topColor;
             ctx.beginPath();
             ctx.moveTo(x - size / 2, y - size / 2);
@@ -51,7 +52,7 @@ export default function AnimatedCubes(): ReactElement {
             ctx.fill();
 
             // 3D effect - right face
-            const rightColor = `hsl(${cube.color.match(/\d+/g)?.join(',')}, 60%, 70%)`;
+            const rightColor = colorMatch ? `hsl(${colorMatch.join(',')}, 60%, 70%)` : cube.color;
             ctx.fillStyle = rightColor;
             ctx.beginPath();
             ctx.moveTo(x + size / 2, y - size / 2);
