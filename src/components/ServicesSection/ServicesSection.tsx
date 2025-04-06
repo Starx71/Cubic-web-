@@ -4,19 +4,22 @@ import ServiceCard from './ServiceCard';
 
 const services = [
     {
-        title: "AI Consulting",
-        description: "Strategic guidance to integrate AI into your business, identify opportunities, and develop roadmaps.",
+        title: "Smart Manufacturing",
+        description: "Strategic guidance to integrate AI into your manufacturing processes, identify opportunities, and develop roadmaps.",
         icon: <BrainCircuit className="w-8 h-8" />,
+        image: "/images/smart-manufacturing.jpg"
     },
     {
-        title: "Custom AI Development",
-        description: "Tailored AI solutions, including machine learning models, computer vision, and natural language processing.",
+        title: "Healthcare Solutions",
+        description: "Tailored AI solutions for healthcare, including machine learning models, computer vision, and natural language processing.",
         icon: <Zap className="w-8 h-8" />,
+        image: "/images/healthcare.jpg"
     },
     {
-        title: "AI Integration",
-        description: "Seamless integration of AI solutions into your existing systems and workflows.",
+        title: "Financial Services",
+        description: "Seamless integration of AI solutions into your financial systems and workflows for improved efficiency and security.",
         icon: <Code2 className="w-8 h-8" />,
+        image: "/images/financial-services.jpg"
     },
     {
         title: "Data Analysis",

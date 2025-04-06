@@ -7,9 +7,10 @@ interface ServiceCardProps {
     description: string;
     icon: React.ReactNode;
     index: number;
+    image?: string;
 }
 
-const ServiceCard = memo(({ title, description, icon, index }: ServiceCardProps) => {
+const ServiceCard = memo(({ title, description, icon, index, image }: ServiceCardProps) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const cardVariants = {
@@ -38,6 +39,18 @@ const ServiceCard = memo(({ title, description, icon, index }: ServiceCardProps)
             role="article"
             aria-label={`${title} service`}
         >
+            {image && (
+                <div className="mb-4 overflow-hidden rounded-lg">
+                    <motion.img
+                        src={image}
+                        alt={`${title} service`}
+                        className="w-full h-48 object-cover"
+                        initial={{ scale: 1 }}
+                        animate={{ scale: isHovered ? 1.05 : 1 }}
+                        transition={{ duration: 0.3 }}
+                    />
+                </div>
+            )}
             <motion.div
                 className="mb-4 text-blue-500"
                 variants={iconVariants}

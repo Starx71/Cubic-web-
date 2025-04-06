@@ -38,7 +38,7 @@ function AboutSection() {
           <div className="w-full md:w-1/2">
             {/* Animated image using framer-motion */}
             <motion.img
-              src="https://placehold.co/600x400/a3e635/1f2937?text=AICore+Team" // Using a placeholder with theme colors
+              src="/images/about-section.jpg" // Using the about section image
               alt="AICore team working on AI solutions" // More descriptive alt text
               className="rounded-xl shadow-lg w-full h-auto object-cover"
               variants={imageVariants} // Apply defined variants
