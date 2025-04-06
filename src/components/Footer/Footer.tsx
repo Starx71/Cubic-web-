@@ -60,7 +60,7 @@ const Footer = memo(() => {
                     <motion.div variants={itemVariants}>
                         <h3 className="text-lg font-semibold text-white mb-4">About Us</h3>
                         <p className="text-gray-400">
-                            AICore is dedicated to providing cutting-edge AI solutions
+                            Starx is dedicated to providing cutting-edge AI solutions
                             to help businesses thrive in the digital age.
                         </p>
                     </motion.div>
@@ -125,7 +125,7 @@ const Footer = memo(() => {
                     className="mt-8 pt-8 border-t border-gray-800 text-center"
                 >
                     <motion.p variants={itemVariants} className="text-gray-400">
-                        © {currentYear} AICore. All rights reserved.
+                        © {currentYear} Starx. All rights reserved.
                     </motion.p>
                     <motion.div variants={itemVariants} className="mt-4 space-x-4">
                         <a 

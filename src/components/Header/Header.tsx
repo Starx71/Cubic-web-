@@ -1,7 +1,5 @@
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BrainCircuit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Header = () => {
@@ -15,9 +13,13 @@ const Header = () => {
         <header className="py-4 px-4 sm:px-6 lg:px-8 bg-white/10 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200/20">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                    <BrainCircuit className="w-8 h-8 text-blue-500" />
+                    <img 
+                        src="/images/logo.jpg" 
+                        alt="Starx Logo" 
+                        className="w-10 h-10 rounded-full object-cover"
+                    />
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                        AICore
+                        Starx
                     </h1>
                 </div>
                 <nav className="hidden md:block">

@@ -39,7 +39,7 @@ function AboutSection() {
             {/* Animated image using framer-motion */}
             <motion.img
               src="/images/about-section.jpg" // Using the about section image
-              alt="AICore team working on AI solutions" // More descriptive alt text
+              alt="Starx team working on AI solutions" // More descriptive alt text
               className="rounded-xl shadow-lg w-full h-auto object-cover"
               variants={imageVariants} // Apply defined variants
               initial="initial" // Start with the 'initial' variant
@@ -60,7 +60,7 @@ function AboutSection() {
           <div className="w-full md:w-1/2 text-gray-700 dark:text-gray-300"> {/* Added dark mode text color */}
             {/* Main description paragraph */}
             <p className="text-lg mb-6"> {/* Added margin-bottom */}
-              AICore is a team of passionate AI experts dedicated to helping
+              Starx is a team of passionate AI experts dedicated to helping
               businesses harness the power of artificial intelligence. With
               years of experience in machine learning, computer vision, and
               natural language processing, we develop custom solutions that
@@ -117,7 +117,7 @@ function App() {
 
       {/* You can add a Footer here */}
       <footer className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-4 text-center mt-12">
-          © 2025 AICore. All rights reserved.
+          © 2025 Starx. All rights reserved.
       </footer>
     </div>
   );

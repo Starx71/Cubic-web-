@@ -74,11 +74,11 @@ const ContactSection = memo(() => {
                             <div>
                                 <h4 className="font-medium text-gray-900">Email</h4>
                                 <a 
-                                    href="mailto:contact@aicore.com" 
+                                    href="mailto:contact@starx.com" 
                                     className="text-blue-600 hover:text-blue-800 transition-colors"
                                     aria-label="Send us an email"
                                 >
-                                    contact@aicore.com
+                                    contact@starx.com
                                 </a>
                             </div>
                             <div>

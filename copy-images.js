@@ -16,7 +16,8 @@ const images = [
   'smart-manufacturing.jpg',
   'healthcare.jpg',
   'financial-services.jpg',
-  'about-section.jpg'
+  'about-section.jpg',
+  'logo.jpg'
 ];
 
 // Copy each image
